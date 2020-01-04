@@ -72,18 +72,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						log.Print(err)
 					}
 				} else {
-					local1, err1 := time.LoadLocation("UTC")
-					if err1 != nil {
-						fmt.Println(err1)
-					}
-					local2, err2 := time.LoadLocation("Asia/Taipei")
-					if err2 != nil {
-						fmt.Println(err2)
-					}
-					local3, err3 := time.LoadLocation("America/Los_Angeles")
-					if err3 != nil {
-						fmt.Println(err3)
-					}
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
 						log.Print(err)
 					}
