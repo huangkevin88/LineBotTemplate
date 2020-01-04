@@ -52,7 +52,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 				//quota, err := bot.GetMessageQuota().Do()
-				t := time.Now()
+				t := time.Now().Local()
 				if err != nil {
 					log.Println("Quota err:", err)
 				}
