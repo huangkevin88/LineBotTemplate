@@ -64,11 +64,19 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				if err3 != nil {
 					fmt.Println(err3)
 				}
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+
-												      "\nUTC time: "+now.In(local1).Format(time.UnixDate)+
-												      "\nTaipei time: "+now.In(local2).Format(time.UnixDate)+
-												      "\nUSA time: "+now.In(local3).Format(time.UnixDate))).Do(); err != nil {
-					log.Print(err)
+				
+				if message.Text == "time" {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+
+													      "\nUTC time: "+now.In(local1).Format(time.UnixDate)+
+													      "\nTaipei time: "+now.In(local2).Format(time.UnixDate)+
+													      "\nUSA time: "+now.In(local3).Format(time.UnixDate))).Do(); err != nil {
+						log.Print(err)
+					}
+				}
+				else{
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
+						log.Print(err)
+					}
 				}
 			}
 		}
