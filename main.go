@@ -52,7 +52,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 				now := time.Now()
-				if message.Text == "time" {
+				if message.Text == "Time" || "time" || "TIME"{
 					local1, err1 := time.LoadLocation("UTC")
 					if err1 != nil {
 						fmt.Println(err1)
@@ -65,7 +65,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					if err3 != nil {
 						fmt.Println(err3)
 					}
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Current Time: "+
 													      "\nUTC time: "+now.In(local1).Format(time.UnixDate)+
 													      "\nTaipei time: "+now.In(local2).Format(time.UnixDate)+
 													      "\nUSA time: "+now.In(local3).Format(time.UnixDate))).Do(); err != nil {
