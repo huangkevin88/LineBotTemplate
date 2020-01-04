@@ -57,7 +57,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					log.Println("Quota err:", err)
 				}
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+
-												      "   Time now: "+t.Format(time.UnixDate))).Do(); err != nil {
+												      " Location: "+t.Location()+
+												      " Time now: "+t.Format(time.UnixDate))).Do(); err != nil {
 					log.Print(err)
 				}
 			}
