@@ -57,7 +57,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				if err1 != nil {
 					fmt.Println(err1)
 				}
-				local2, err2 := time.LoadLocation("Asia/Taipei"
+				local2, err2 := time.LoadLocation("Asia/Taipei")
 				if err2 != nil {
 					fmt.Println(err2)
 				}
