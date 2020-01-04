@@ -52,11 +52,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 				now := time.Now()
-				local1, err1 := time.LoadLocation("")
+				myformat:="2020-01-01 00:00:00 Wed"
+				local1, err1 := time.LoadLocation("UTC")
 				if err1 != nil {
 					fmt.Println(err1)
 				}
-				local2, err2 := time.LoadLocation("Local")//服务器上设置的时区
+				local2, err2 := time.LoadLocation("Asia/Taipei"
 				if err2 != nil {
 					fmt.Println(err2)
 				}
@@ -65,9 +66,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					fmt.Println(err3)
 				}
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+
-												      "     time1: "+now.In(local1).Format(time.UnixDate)+
-												      "     time2: "+now.In(local2).Format(time.UnixDate)+
-												      "     time3: "+now.In(local3).Format(time.UnixDate))).Do(); err != nil {
+												      "     time1: "+now.In(local1).Format(myformat)+
+												      "     time2: "+now.In(local2).Format(myformat)+
+												      "     time3: "+now.In(local3).Format(myformat))).Do(); err != nil {
 					log.Print(err)
 				}
 			}
