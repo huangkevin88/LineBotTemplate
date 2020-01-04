@@ -56,7 +56,18 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				if err1 != nil {
 					fmt.Println(err1)
 				}
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"     time: "+now.In(local1).Format(time.UnixDate))).Do(); err != nil {
+				local2, err2 := time.LoadLocation("Local")//服务器上设置的时区
+				if err2 != nil {
+					fmt.Println(err2)
+				}
+				local3, err3 := time.LoadLocation("America/Los_Angeles")
+				if err3 != nil {
+					fmt.Println(err3)
+				}
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+
+												      "     time1: "+now.In(local1).Format(time.UnixDate)+
+												      "     time1: "+now.In(local1).Format(time.UnixDate)+
+												      "     time1: "+now.In(local1).Format(time.UnixDate))).Do(); err != nil {
 					log.Print(err)
 				}
 			}
