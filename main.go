@@ -50,13 +50,13 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
-				case *linebot.TextMessage:
+			case *linebot.TextMessage:
 				now := time.Now()
 				local1, err1 := time.LoadLocation("")
 				if err1 != nil {
 					fmt.Println(err1)
 				}
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"     time: "+now.In(local1))).Do(); err != nil {
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"     time: "+now.In(local1).Format("00:00"))).Do(); err != nil {
 					log.Print(err)
 				}
 			}
