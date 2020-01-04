@@ -50,10 +50,24 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
+			now := time.Now()
+			local1, err1 := time.LoadLocation("") //等同于"UTC"
+			    if err1 != nil {
+				fmt.Println(err1)
+			    }
+			local2, err2 := time.LoadLocation("Local")//服务器上设置的时区
+			    if err2 != nil {
+				fmt.Println(err2)
+			    }
+			local3, err3 := time.LoadLocation("America/Los_Angeles")
+			    if err3 != nil {
+				fmt.Println(err3)
+			    }
 			case *linebot.TextMessage:
-				t, err := time.LoadLocation("")
-				bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+
-											  " Time now: "+t.String())).Do(); err != nil {
+				if err != nil {
+					log.Println("...", err)
+				}
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"     time: "+now.In(local1)+" / "+now.In(local2)+" / "+now.In(local3))).Do(); err != nil {
 					log.Print(err)
 				}
 			}
