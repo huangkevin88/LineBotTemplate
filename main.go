@@ -66,9 +66,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					fmt.Println(err3)
 				}
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+
-												      "     time1: "+now.In(local1).Format(myformat)+
-												      "     time2: "+now.In(local2).Format(myformat)+
-												      "     time3: "+now.In(local3).Format(myformat))).Do(); err != nil {
+												      "\n     UTC time: "+now.In(local1).Format(myformat)+
+												      "     Taipei time: "+now.In(local2).Format(myformat)+
+												      "     USA time: "+now.In(local3).Format(myformat))).Do(); err != nil {
 					log.Print(err)
 				}
 			}
