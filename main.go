@@ -56,7 +56,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				if err1 != nil {
 					fmt.Println(err1)
 				}
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"     time: "+now.In(local1).Format("00:00"))).Do(); err != nil {
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"     time: "+now.In(local1).Format(time.UnixDate))).Do(); err != nil {
 					log.Print(err)
 				}
 			}
