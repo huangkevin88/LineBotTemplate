@@ -17,6 +17,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 	//"strconv"
 
 	"github.com/line/line-bot-sdk-go/linebot"
@@ -54,7 +55,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				if err != nil {
 					log.Println("Quota err:", err)
 				}
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"Time now: "+time.Now())).Do(); err != nil {
 					log.Print(err)
 				}
 			}
