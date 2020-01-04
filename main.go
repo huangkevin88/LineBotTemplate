@@ -66,8 +66,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				}
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+
 												      "     time1: "+now.In(local1).Format(time.UnixDate)+
-												      "     time1: "+now.In(local1).Format(time.UnixDate)+
-												      "     time1: "+now.In(local1).Format(time.UnixDate))).Do(); err != nil {
+												      "     time2: "+now.In(local2).Format(time.UnixDate)+
+												      "     time3: "+now.In(local3).Format(time.UnixDate))).Do(); err != nil {
 					log.Print(err)
 				}
 			}
