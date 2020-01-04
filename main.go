@@ -52,11 +52,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 				//quota, err := bot.GetMessageQuota().Do()
-				t := time.Now()
+				t := time.Local()
 				if err != nil {
 					log.Println("Quota err:", err)
 				}
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"Time now: "+t.Format("20060102150405"))).Do(); err != nil {
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"   Time now: "+t.Format("20060102150405"))).Do(); err != nil {
 					log.Print(err)
 				}
 			}
