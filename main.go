@@ -71,29 +71,29 @@ func decoding(b []byte) string{
 		if(i.ElementValue != "-99"){
 			switch i.ElementName{
 				case "TEMP":	
-						weatherState += "溫度: "+ i.ElementValue[0:len([]rune(i.ElementValue))-1] +"°C\n"
+						weatherState += "溫度: "+i.ElementValue[0:len([]rune(i.ElementValue))-1]+"°C\n"
 				case "HUMD":
 						hm,err := strconv.ParseFloat(i.ElementValue,64)
 						if(err==nil){
 							hm = hm*100
-							weatherState += "相對溼度: "+ fmt.Sprintf("%.0f", hm) + "%\n"
+							weatherState += "相對溼度: "+fmt.Sprintf("%.0f", hm)+"%\n"
 						}						
 				case "SUN":
-						weatherState += "日照時數: "+ i.ElementValue + "H\n"  
+						weatherState += "日照時數: "+i.ElementValue+"H\n"  
 				case "H_UVI": 
 						uvi,err := strconv.ParseFloat(i.ElementValue,64)
 						if(err==nil){
 							if(uvi == 0){
 							}else if(uvi <= 2){
-								weatherState += "紫外線指數: "+ i.ElementValue + " (低量)\n"
+								weatherState += "紫外線指數: "+i.ElementValue+" (低量)\n"
 							}else if(uvi <= 5){
-								weatherState += "紫外線指數: "+ i.ElementValue + " (中量)\n"
+								weatherState += "紫外線指數: "+i.ElementValue+" (中量)\n"
 							}else if(uvi <= 7){
-								weatherState += "紫外線指數: "+ i.ElementValue + " (高量)\n"
+								weatherState += "紫外線指數: "+i.ElementValue+" (高量)\n"
 							}else if(uvi <= 10){
-								weatherState += "紫外線指數: "+ i.ElementValue + " (過量)\n"
+								weatherState += "紫外線指數: "+i.ElementValue+" (過量)\n"
 							}else{
-								weatherState += "紫外線指數: "+ i.ElementValue + " (危險)\n"
+								weatherState += "紫外線指數: "+i.ElementValue+" (危險)\n"
 							}
 						}
 				case "24R":
@@ -103,15 +103,15 @@ func decoding(b []byte) string{
 						}
 						
 				case "D_TX":
-						weatherState += "最高溫: "+ i.ElementValue[0:len([]rune(i.ElementValue))-1] + "°C\n"
+						weatherState += "最高溫: "+i.ElementValue[0:len([]rune(i.ElementValue))-1]+"°C\n"
 				case "D_TN":
-						weatherState += "最低溫: "+ i.ElementValue[0:len([]rune(i.ElementValue))-1] + "°C\n"
+						weatherState += "最低溫: "+i.ElementValue[0:len([]rune(i.ElementValue))-1]+"°C\n"
 				default:
 			}
 		}	   	
 	}
 	getTime := t.Records.Location[0].Time.ObsTime
-	weatherState += "\n更新時間: "getTime[0:len([]rune(getTime))-3]
+	weatherState += "\n更新時間: "+getTime[0:len([]rune(getTime))-3]
 	return weatherState
 }
 
