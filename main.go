@@ -71,7 +71,7 @@ func decoding(b []byte) string{
 		if(i.ElementValue != "-99"){
 			switch i.ElementName{
 				case "TEMP":	
-						weatherState += "溫度: "+i.ElementValue[0:len([]rune(i.ElementValue))-1]+"°C\n"
+						weatherState += "溫度: "+i.ElementValue+"°C\n"
 				case "HUMD":
 						hm,err := strconv.ParseFloat(i.ElementValue,64)
 						if(err==nil){
@@ -132,27 +132,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 				
-				now := time.Now()
-				if ((message.Text == "Time") || (message.Text == "time") || (message.Text == "TIME") || (message.Text == "時間") || (message.Text == "現在時間")){
-					local1, err1 := time.LoadLocation("UTC")
-					if err1 != nil {
-						fmt.Println(err1)
-					}
-					local2, err2 := time.LoadLocation("Asia/Taipei")
-					if err2 != nil {
-						fmt.Println(err2)
-					}
-					local3, err3 := time.LoadLocation("America/Los_Angeles")
-					if err3 != nil {
-						fmt.Println(err3)
-					}
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("現在時間: "+
-													      "\n世界協調時間(UTC): "+now.In(local1).Format(time.UnixDate)+
-													      "\n台灣-台北 時間: "+now.In(local2).Format(time.UnixDate)+
-													      "\n美國-洛杉磯 時間: "+now.In(local3).Format(time.UnixDate))).Do(); err != nil {
-						log.Print(err)
-					}
-				} else if (message.Text == "天氣"){
+				if (message.Text == "天氣"){
 					resp, _ := http.Get("https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization=CWB-5392AACA-249F-4D87-9657-11BA88B990E8&locationName="+myLat)
 					defer resp.Body.Close()  //關閉連線
 					body, _ := ioutil.ReadAll(resp.Body) //讀取body的內容
