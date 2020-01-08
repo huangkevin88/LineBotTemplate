@@ -70,7 +70,7 @@ func decoding(b []byte) string{
 		if(i.ElementValue != "-99"){
 			switch i.ElementName{
 				case "TEMP":	
-						weatherState += "溫度: "+i.ElementValue[0:len([]rune(i.ElementValue))-1]+"°C\n"
+						weatherState += "溫度: "+i.ElementValue +"°C\n"
 				case "HUMD":
 						hm,err := strconv.ParseFloat(i.ElementValue,64)
 						if(err==nil){
@@ -102,9 +102,9 @@ func decoding(b []byte) string{
 						}
 						
 				case "D_TX":
-						weatherState += "最高溫: "+i.ElementValue[0:len([]rune(i.ElementValue))-1]+"°C\n"
+						weatherState += "最高溫: "+i.ElementValue +"°C\n"
 				case "D_TN":
-						weatherState += "最低溫: "+i.ElementValue[0:len([]rune(i.ElementValue))-1]+"°C\n"
+						weatherState += "最低溫: "+i.ElementValue +"°C\n"
 				default:
 			}
 		}	   	
@@ -154,66 +154,66 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
 					}
-				}else if (message.Text == "桃園") || (message.Text == "桃園市"){
+				}/*else if (message.Text == "桃園") || (message.Text == "桃園市"){
 					myLat = "桃園"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
-					}
+					}*/
 				}else if (message.Text == "新竹") || (message.Text == "新竹縣") || (message.Text == "新竹市"){
 					myLat = "新竹"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
 					}
-				}else if (message.Text == "苗栗") || (message.Text == "苗栗縣") || (message.Text == "苗栗國"){
+				/*}else if (message.Text == "苗栗") || (message.Text == "苗栗縣") || (message.Text == "苗栗國"){
 					myLat = "苗栗"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
-					}
+					}*/
 				}else if (message.Text == "台中") || (message.Text == "臺中") || (message.Text == "台中市") || (message.Text == "臺中市"){
 					myLat = "臺中"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
 					}
-				}else if (message.Text == "彰化") || (message.Text == "彰化縣"){
+				/*}else if (message.Text == "彰化") || (message.Text == "彰化縣"){
 					myLat = "員林"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
-					}
-				}else if (message.Text == "南投") || (message.Text == "南投縣"){
+					}*/
+				/*}else if (message.Text == "南投") || (message.Text == "南投縣"){
 					myLat = "南投"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
-					}
-				}else if (message.Text == "雲林") || (message.Text == "雲林縣"){
+					}*/
+				/*}else if (message.Text == "雲林") || (message.Text == "雲林縣"){
 					myLat = "斗六"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
-					}
-				}else if (message.Text == "嘉義縣"){
+					}*/
+				/*}else if (message.Text == "嘉義縣"){
 					myLat = "民雄"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
-					}
+					}*/
 				}else if (message.Text == "嘉義市"){
 					myLat = "嘉義"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
 					}
-				}else if (message.Text == "台南") || (message.Text == "臺南") || (message.Text == "台南市") || (message.Text == "臺南市"){
+				/*}else if (message.Text == "台南") || (message.Text == "臺南") || (message.Text == "台南市") || (message.Text == "臺南市"){
 					myLat = "臺南"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
-					}
+					}*/
 				}else if (message.Text == "高雄") || (message.Text == "高雄市"){
 					myLat = "高雄"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
 					}
-				}else if (message.Text == "屏東") || (message.Text == "屏東縣"){
+				/*}else if (message.Text == "屏東") || (message.Text == "屏東縣"){
 					myLat = "屏東"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
-					}
+					}*/
 				}else if (message.Text == "宜蘭") || (message.Text == "宜蘭縣"){
 					myLat = "宜蘭"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
@@ -241,11 +241,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					}
 				}else if (message.Text == "連江") || (message.Text == "連江縣") || (message.Text == "馬祖"){
 					myLat = "馬祖"
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
-						log.Print(err)
-					}
-				}else if (message.Text == "綠島"){
-					myLat = "綠島"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
 					}
