@@ -136,7 +136,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					defer resp.Body.Close()  //關閉連線
 					body, _ := ioutil.ReadAll(resp.Body) //讀取body的內容
 
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(myLat+"\n———————————————\n"+decoding(body))).Do(); err != nil {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(myLat+"\n—————————————\n"+decoding(body))).Do(); err != nil {
 						log.Print(err)
 					}
 				}else if (message.Text == "基隆") || (message.Text == "基隆市") || (message.Text == "基隆縣"){
@@ -164,7 +164,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
 					}
-				}else if (message.Text == "新竹縣"){
+				}else if (message.Text == "新竹") || (message.Text == "新竹縣") || (message.Text == "新竹市"){
 					myLat = "新竹"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
