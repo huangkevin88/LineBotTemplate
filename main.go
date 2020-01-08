@@ -70,7 +70,7 @@ func decoding(b []byte) string{
 		if(i.ElementValue != "-99"){
 			switch i.ElementName{
 				case "TEMP":	
-						weatherState += "溫度: "+i.ElementValue+"°C\n"
+						weatherState += "溫度: "+i.ElementValue[0:len([]rune(i.ElementValue))-1]+"°C\n"
 				case "HUMD":
 						hm,err := strconv.ParseFloat(i.ElementValue,64)
 						if(err==nil){
@@ -141,12 +141,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					}
 				}else if (message.Text == "台中"){
 					myLat = "臺中"
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("已轉換測站至 '"+myLat+"'")).Do(); err != nil {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
 					}
 				}else if (message.Text == "高雄"){
 					myLat = "高雄"
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("已轉換測站至 '"+myLat+"'")).Do(); err != nil {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
 					}
 				}else{
