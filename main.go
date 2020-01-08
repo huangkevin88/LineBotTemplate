@@ -139,12 +139,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(myLat+"\n----------\n"+decoding(body))).Do(); err != nil {
 						log.Print(err)
 					}
-				}else if (message.Text == "台中"){
+				}else if (message.Text == "台中") || (message.Text == "臺中") || (message.Text == "台中市") || (message.Text == "臺中市"){
 					myLat = "臺中"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
 					}
-				}else if (message.Text == "高雄"){
+				}else if (message.Text == "高雄") || (message.Text == "高雄市"){
 					myLat = "高雄"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
