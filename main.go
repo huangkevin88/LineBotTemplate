@@ -159,11 +159,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
 					}
-				}else if (message.Text == "新竹市"){
-					myLat = "新竹市東區"
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
-						log.Print(err)
-					}
 				}else if (message.Text == "新竹") || (message.Text == "新竹縣") || (message.Text == "新竹市"){
 					myLat = "新竹"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
