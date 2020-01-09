@@ -130,11 +130,11 @@ func decodingmore(b []byte) string{
 				case "D_TX":
 						weatherState += "本日最高溫: "+i.ElementValue+"°C\n"					
 				case "D_TXT":
-						weatherState += "本日最高溫時間: "+i.ElementValue+"\n"				
+						weatherState += "本日最高溫時間: "+i.ElementValue[0:len([]rune(i.ElementValue))-2]+ ":" +i.ElementValue[len([]rune(i.ElementValue))-2:len([]rune(i.ElementValue))]+"\n"				
 				case "D_TN":
 						weatherState += "本日最低溫: "+i.ElementValue+"°C\n"					
 				case "D_TNT":
-						weatherState += "本日最低溫時間: "+i.ElementValue+"\n"
+						weatherState += "本日最低溫時間: "+i.ElementValue[0:len([]rune(i.ElementValue))-2]+ ":" +i.ElementValue[len([]rune(i.ElementValue))-2:len([]rune(i.ElementValue))]+"\n"
 				default:
 			}
 		}	   	
@@ -169,6 +169,14 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			case *linebot.TextMessage:
 				
 				if (message.Text == "天氣"){
+					resp, _ := http.Get("https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization=CWB-5392AACA-249F-4D87-9657-11BA88B990E8&locationName="+myLat)
+					defer resp.Body.Close()  //關閉連線
+					body, _ := ioutil.ReadAll(resp.Body) //讀取body的內容
+
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(myLat+"\n—————————————\n"+decoding(body)+getTime(body))).Do(); err != nil {
+						log.Print(err)
+					}
+				}else if (message.Text == "詳細") || (message.Text == "詳細資料") || (message.Text == "更多"){
 					resp, _ := http.Get("https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization=CWB-5392AACA-249F-4D87-9657-11BA88B990E8&locationName="+myLat)
 					defer resp.Body.Close()  //關閉連線
 					body, _ := ioutil.ReadAll(resp.Body) //讀取body的內容
