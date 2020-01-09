@@ -191,7 +191,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
 					}
-				}/*else if (message.Text == "桃園") || (message.Text == "桃園市"){
+				/*}else if (message.Text == "桃園") || (message.Text == "桃園市"){
 					myLat = "桃園"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
