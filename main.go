@@ -109,6 +109,7 @@ func decoding(b []byte) string{
 			}
 		}	   	
 	}
+	return weatherState
 }
 
 func decodingmore(b []byte) string{
@@ -132,12 +133,13 @@ func decodingmore(b []byte) string{
 						weatherState += "本日最高溫時間: "+i.ElementValue+"\n"				
 				case "D_TN":
 						weatherState += "本日最低溫: "+i.ElementValue+"°C\n"					
-				case "D_TXT":
+				case "D_TNT":
 						weatherState += "本日最低溫時間: "+i.ElementValue+"\n"
 				default:
 			}
 		}	   	
-	}
+	}	
+	return weatherState
 }
 
 func getTime(b []byte) string{
