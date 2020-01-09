@@ -305,7 +305,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						log.Print(err)
 					}
 				}else{
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"\n\n需要幫助嗎？\n輸入'幫助'吧！")).Do(); err != nil {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"\n\n—————————————\n需要幫助嗎？\n輸入'幫助'吧！")).Do(); err != nil {
 						log.Print(err)
 					}
 				}
