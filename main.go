@@ -76,9 +76,7 @@ func decoding(b []byte) string{
 						if(err==nil){
 							hm = hm*100
 							weatherState += "相對溼度: "+fmt.Sprintf("%.0f", hm)+"%\n"
-						}						
-				case "D_TS":
-						weatherState += "日照時數: "+i.ElementValue+"H\n"  
+						}
 				case "H_UVI": 
 						uvi,err := strconv.ParseFloat(i.ElementValue,64)
 						if(err==nil){
@@ -121,12 +119,18 @@ func decodingmore(b []byte) string{
 	for _,i := range nowWeather{
 		if(i.ElementValue != "-99"){
 			switch i.ElementName{
+				case "PRES":
+						weatherState += "測站氣壓: "+i.ElementValue+"hPA\n"
+				case "WDSD":	
+						weatherState += "風速: "+i.ElementValue +"m/s\n"	
 				case "WDIR":	
 						weatherState += "風向: "+i.ElementValue +"度\n"
-				case "WDSD":	
-						weatherState += "風速: "+i.ElementValue +"m/s\n"
-				case "PRES":
-						weatherState += "測站氣壓: "+i.ElementValue+"hPA\n"					
+				case "H_FX":	
+						weatherState += "小時最大陣風風速: "+i.ElementValue +"m/s\n"	
+				case "H_XD":	
+						weatherState += "小時最大陣風風向: "+i.ElementValue +"度\n"
+				case "H_FXT":
+						weatherState += "小時最大陣風時間: "+i.ElementValue[0:len([]rune(i.ElementValue))-2]+ ":" +i.ElementValue[len([]rune(i.ElementValue))-2:len([]rune(i.ElementValue))]+"\n"				
 				case "D_TX":
 						weatherState += "本日最高溫: "+i.ElementValue+"°C\n"					
 				case "D_TXT":
@@ -134,7 +138,9 @@ func decodingmore(b []byte) string{
 				case "D_TN":
 						weatherState += "本日最低溫: "+i.ElementValue+"°C\n"					
 				case "D_TNT":
-						weatherState += "本日最低溫時間: "+i.ElementValue[0:len([]rune(i.ElementValue))-2]+ ":" +i.ElementValue[len([]rune(i.ElementValue))-2:len([]rune(i.ElementValue))]+"\n"
+						weatherState += "本日最低溫時間: "+i.ElementValue[0:len([]rune(i.ElementValue))-2]+ ":" +i.ElementValue[len([]rune(i.ElementValue))-2:len([]rune(i.ElementValue))]+"\n"						
+				case "D_TS":
+						weatherState += "日照時數: "+i.ElementValue+"H\n"  
 				default:
 			}
 		}	   	
