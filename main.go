@@ -146,8 +146,6 @@ func getTime(b []byte) string{
 	var t StationObsResponse
 	json.Unmarshal([]byte(b), &t)
 	var weatherState string = ""
-	nowWeather := t.Records.Location[0].WeatherElement
-
 	getTime := t.Records.Location[0].Time.ObsTime
 	weatherState += "\n更新時間: "+getTime[0:len([]rune(getTime))-3]
 	return weatherState
