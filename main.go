@@ -119,12 +119,12 @@ func decodingmore(b []byte) string{
 	for _,i := range nowWeather{
 		if(i.ElementValue != "-99"){
 			switch i.ElementName{
-				case "PRES":
-						weatherState += "測站氣壓: "+i.ElementValue+"hPA\n"
-				case "WDSD":	
-						weatherState += "風速: "+i.ElementValue +"m/s\n"	
 				case "WDIR":	
 						weatherState += "風向: "+i.ElementValue +"度\n"
+				case "WDSD":	
+						weatherState += "風速: "+i.ElementValue +"m/s\n"
+				case "PRES":
+						weatherState += "測站氣壓: "+i.ElementValue+"hPA\n"
 				case "H_FX":	
 						weatherState += "小時最大陣風風速: "+i.ElementValue +"m/s\n"	
 				case "H_XD":	
@@ -180,6 +180,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					body, _ := ioutil.ReadAll(resp.Body) //讀取body的內容
 
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(myLat+"\n—————————————\n"+decoding(body)+getTime(body))).Do(); err != nil {
+						log.Print(err)
+					}
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("輸入'更多'查看詳細資訊").Do(); err != nil {
 						log.Print(err)
 					}
 				}else if (message.Text == "詳細") || (message.Text == "詳細資料") || (message.Text == "更多"){
