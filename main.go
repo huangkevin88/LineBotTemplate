@@ -183,7 +183,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						log.Print(err)
 					}
 				}else if (message.Text == "幫助") || (message.Text == "Help") || (message.Text == "help") || (message.Text == "HELP"){
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("幫助\n—————————————\n·輸入'天氣' → 查詢天氣\n·輸入'更多' → 查詢詳細天氣\n·輸入城市名→切換測站地點\n—————————————\n可查詢城市:\n")).Do(); err != nil {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("幫助\n—————————————\n·輸入'天氣' → 查詢天氣\n·輸入'更多' → 查詢詳細天氣\n·輸入城市名→切換測站地點\n—————————————\n可查詢城市:\n基隆 新北 台北 新竹 \n台中 嘉義 高雄 宜蘭 \n花蓮 台東 澎湖 金門 \n連江 蘭嶼\n")).Do(); err != nil {
 						log.Print(err)
 					}
 				}else if (message.Text == "詳細") || (message.Text == "詳細資料") || (message.Text == "更多"){
@@ -249,7 +249,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
 					}*/
-				}else if (message.Text == "嘉義市"){
+				}else if (message.Text == "嘉義") || (message.Text == "嘉義市"){
 					myLat = "嘉義"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("目前測站: "+myLat)).Do(); err != nil {
 						log.Print(err)
@@ -305,7 +305,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						log.Print(err)
 					}
 				}else{
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+"\n\n需要幫助嗎？\n輸入'幫助'吧！")).Do(); err != nil {
 						log.Print(err)
 					}
 				}
