@@ -77,7 +77,7 @@ func decoding(b []byte) string{
 							hm = hm*100
 							weatherState += "相對溼度: "+fmt.Sprintf("%.0f", hm)+"%\n"
 						}						
-				case "SUN":
+				case "D_TS":
 						weatherState += "日照時數: "+i.ElementValue+"H\n"  
 				case "H_UVI": 
 						uvi,err := strconv.ParseFloat(i.ElementValue,64)
@@ -109,6 +109,43 @@ func decoding(b []byte) string{
 			}
 		}	   	
 	}
+}
+
+func decodingmore(b []byte) string{
+	var t StationObsResponse
+	json.Unmarshal([]byte(b), &t)
+	var weatherState string = ""
+	nowWeather := t.Records.Location[0].WeatherElement
+
+	for _,i := range nowWeather{
+		if(i.ElementValue != "-99"){
+			switch i.ElementName{
+				case "WDIR":	
+						weatherState += "風向: "+i.ElementValue +"度\n"
+				case "WDSD":	
+						weatherState += "風速: "+i.ElementValue +"m/s\n"
+				case "PRES":
+						weatherState += "測站氣壓: "+i.ElementValue+"hPA\n"					
+				case "D_TX":
+						weatherState += "本日最高溫: "+i.ElementValue+"°C\n"					
+				case "D_TXT":
+						weatherState += "本日最高溫時間: "+i.ElementValue+"\n"				
+				case "D_TN":
+						weatherState += "本日最低溫: "+i.ElementValue+"°C\n"					
+				case "D_TXT":
+						weatherState += "本日最低溫時間: "+i.ElementValue+"\n"
+				default:
+			}
+		}	   	
+	}
+}
+
+func getTime(b []byte) string{
+	var t StationObsResponse
+	json.Unmarshal([]byte(b), &t)
+	var weatherState string = ""
+	nowWeather := t.Records.Location[0].WeatherElement
+
 	getTime := t.Records.Location[0].Time.ObsTime
 	weatherState += "\n更新時間: "+getTime[0:len([]rune(getTime))-3]
 	return weatherState
@@ -136,7 +173,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					defer resp.Body.Close()  //關閉連線
 					body, _ := ioutil.ReadAll(resp.Body) //讀取body的內容
 
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(myLat+"\n—————————————\n"+decoding(body))).Do(); err != nil {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(myLat+"\n—————————————\n"+decoding(body)+decodingmore(body)+getTime(body))).Do(); err != nil {
 						log.Print(err)
 					}
 				}else if (message.Text == "基隆") || (message.Text == "基隆市") || (message.Text == "基隆縣"){
