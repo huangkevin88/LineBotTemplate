@@ -182,7 +182,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(myLat+"\n—————————————\n"+decoding(body)+getTime(body))).Do(); err != nil {
 						log.Print(err)
 					}
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("輸入'更多'查看詳細資訊").Do(); err != nil {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("輸入'更多'查看詳細資訊")).Do(); err != nil {
 						log.Print(err)
 					}
 				}else if (message.Text == "詳細") || (message.Text == "詳細資料") || (message.Text == "更多"){
